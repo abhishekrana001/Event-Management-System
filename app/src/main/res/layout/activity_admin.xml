@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Background Image -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/event_activity"
+        android:scaleType="centerCrop"/>
+
+    <!-- Dark Overlay -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B3000000"/>
+
+    <!-- Main Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Toolbar -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:title="Admin Dashboard"
+            android:background="#E99A31"
+            app:titleTextColor="@color/white"
+            android:titleTextColor="@android:color/white"/>
+
+        <!-- Content Area -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp">
+
+            <!-- Add Event -->
+            <Button
+                android:id="@+id/btnAddEvent"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="Add Event"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#4CAF50"/>
+
+            <!-- View Events -->
+            <Button
+                android:id="@+id/btnViewEvents"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="View Events"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#2196F3"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id="@+id/btnViewStats"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="View Stats"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#9C27B0"
+                android:layout_marginTop="20dp"/>
+
+
+            <!-- Logout -->
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="Logout"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#E53935"
+                android:layout_marginTop="30dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

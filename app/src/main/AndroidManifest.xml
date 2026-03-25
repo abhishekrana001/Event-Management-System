@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/even_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/even_icon"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.EventManagementSystem">
+        <activity
+            android:name=".activity.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdminStatsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.LongInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MyJoinedEventsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AllEventsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ViewEventsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CreateEventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
