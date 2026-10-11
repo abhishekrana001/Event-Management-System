@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventmanagementsystem.R
 import com.example.eventmanagementsystem.data.Event
+import com.example.eventmanagementsystem.utils.DateUtils
 
 class EventAdapter(
     private var eventList: List<Event>,
@@ -33,7 +34,8 @@ class EventAdapter(
         val event = eventList[position]
 
         holder.tvTitle.text = event.title
-        holder.tvDate.text = "${event.date} - ${event.time}"
+        val displayDate = DateUtils.formatDateForDisplay(event.date)
+        holder.tvDate.text = "$displayDate | ${event.time}"
         holder.tvLocation.text = event.location
 
         holder.btnDelete.setOnClickListener {

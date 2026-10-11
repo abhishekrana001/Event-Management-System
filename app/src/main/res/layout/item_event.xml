@@ -1,87 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    app:cardCornerRadius="18dp"
-    app:cardElevation="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
     app:strokeWidth="1dp"
-    app:strokeColor="#E0E0E0">
+    app:strokeColor="#334155">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#1E293B">
 
-        <!-- Event Image -->
+        <!-- Banner Image -->
         <ImageView
             android:id="@+id/imgEvent"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="140dp"
             android:src="@drawable/event_activity"
             android:scaleType="centerCrop"/>
 
-        <!-- Content -->
+        <!-- Content Area -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Title -->
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textColor="#F8FAFC"/>
 
-            <!-- Date -->
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#757575"
-                android:layout_marginTop="4dp"/>
+                android:textColor="#94A3B8"
+                android:textSize="14sp"
+                android:layout_marginTop="6dp"/>
 
-            <!-- Location -->
             <TextView
                 android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#757575"
+                android:textColor="#94A3B8"
+                android:textSize="14sp"
                 android:layout_marginTop="2dp"/>
 
-            <!-- Buttons Row -->
+            <!-- Action Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:gravity="end">
 
                 <Button
                     android:id="@+id/btnEdit"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="44dp"
                     android:text="Edit"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:backgroundTint="#2196F3"/>
+                    android:backgroundTint="#3B82F6"
+                    app:cornerRadius="10dp"/>
 
                 <Button
                     android:id="@+id/btnDelete"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="44dp"
                     android:text="Delete"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:backgroundTint="#E53935"
-                    android:layout_marginStart="12dp"/>
+                    android:backgroundTint="#EF4444"
+                    app:cornerRadius="10dp"
+                    android:layout_marginStart="10dp"/>
 
             </LinearLayout>
 

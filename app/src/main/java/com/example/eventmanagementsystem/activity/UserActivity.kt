@@ -6,7 +6,6 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.eventmanagementsystem.R
 import com.google.android.material.appbar.MaterialToolbar
-import kotlin.jvm.java
 
 class UserActivity : AppCompatActivity() {
 
@@ -17,7 +16,6 @@ class UserActivity : AppCompatActivity() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "User Dashboard"
 
         val userId = intent.getIntExtra("userId", -1)

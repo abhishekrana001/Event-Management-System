@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,36 +10,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/event_activity"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="Background"/>
 
     <!-- Dark Overlay -->
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#B3000000"/>
+        android:background="#CC0F172A"/>
 
-    <!-- Main Content -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Toolbar -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:title="Join Events"
-            android:background="#2196F3"
-            app:titleTextColor="@color/white"
-            android:titleTextColor="@android:color/white"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="#1E293B"
+            app:title="Join Events"
+            app:titleTextColor="@android:color/white"/>
 
-        <!-- RecyclerView Area -->
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Events Available To Join"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#94A3B8"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="60dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerAllEvents"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
             android:clipToPadding="false"/>
 
     </LinearLayout>

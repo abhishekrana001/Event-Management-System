@@ -1,7 +1,9 @@
 package com.example.eventmanagementsystem.activity
 
 import android.os.Bundle
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.eventmanagementsystem.R
@@ -24,13 +26,24 @@ class RegisterActivity : AppCompatActivity() {
         val userDao = db.userDao()
 
         btnRegister.setOnClickListener {
+            val name = etName.text.toString().trim()
+            val email = etEmail.text.toString().trim()
+            val password = etPassword.text.toString().trim()
 
-            val name = etName.text.toString()
-            val email = etEmail.text.toString()
-            val password = etPassword.text.toString()
+            if (name.isEmpty()) {
+                etName.error = "Name is required"
+                return@setOnClickListener
+            }
+            if (email.isEmpty()) {
+                etEmail.error = "Email is required"
+                return@setOnClickListener
+            }
+            if (password.isEmpty()) {
+                etPassword.error = "Password is required"
+                return@setOnClickListener
+            }
 
             lifecycleScope.launch {
-
                 val existingUser = userDao.getUserByEmail(email)
 
                 if (existingUser != null) {

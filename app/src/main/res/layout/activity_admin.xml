@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,82 +10,126 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/event_activity"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="Background"/>
 
     <!-- Dark Overlay -->
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#B3000000"/>
+        android:background="#CC0F172A"/>
 
-    <!-- Main Content -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Toolbar -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:title="Admin Dashboard"
-            android:background="#E99A31"
-            app:titleTextColor="@color/white"
-            android:titleTextColor="@android:color/white"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="#1E293B"
+            app:title="Admin Dashboard"
+            app:titleTextColor="@android:color/white"/>
 
-        <!-- Content Area -->
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="24dp">
+            android:fillViewport="true">
 
-            <!-- Add Event -->
-            <Button
-                android:id="@+id/btnAddEvent"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:text="Add Event"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:backgroundTint="#4CAF50"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:gravity="center">
 
-            <!-- View Events -->
-            <Button
-                android:id="@+id/btnViewEvents"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:text="View Events"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:backgroundTint="#2196F3"
-                android:layout_marginTop="20dp"/>
+                <!-- Admin Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#334155"
+                    app:cardBackgroundColor="#1E293B"
+                    android:layout_marginBottom="24dp">
 
-            <Button
-                android:id="@+id/btnViewStats"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:text="View Stats"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:backgroundTint="#9C27B0"
-                android:layout_marginTop="20dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Admin Control Panel"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="#FFFFFF"/>
 
-            <!-- Logout -->
-            <Button
-                android:id="@+id/btnLogout"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:text="Logout"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:backgroundTint="#E53935"
-                android:layout_marginTop="30dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Create new events, manage existing events, and view participation statistics."
+                            android:textSize="14sp"
+                            android:textColor="#94A3B8"
+                            android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
+                <!-- Actions -->
+                <Button
+                    android:id="@+id/btnAddEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Add New Event"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="#10B981"
+                    app:cornerRadius="16dp"/>
+
+                <Button
+                    android:id="@+id/btnViewEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="View All Events"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="#3B82F6"
+                    app:cornerRadius="16dp"
+                    android:layout_marginTop="16dp"/>
+
+                <Button
+                    android:id="@+id/btnViewStats"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="View Statistics"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="#8B5CF6"
+                    app:cornerRadius="16dp"
+                    android:layout_marginTop="16dp"/>
+
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Logout"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="#EF4444"
+                    app:cornerRadius="16dp"
+                    android:layout_marginTop="32dp"/>
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 

@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    app:cardCornerRadius="18dp"
-    app:cardElevation="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
     app:strokeWidth="1dp"
-    app:strokeColor="#E0E0E0">
+    app:strokeColor="#1E293B">
 
-    ```
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#1E293B">
 
-        <!-- Event Image -->
+        <!-- Banner Image -->
         <ImageView
             android:id="@+id/imgEvent"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="140dp"
             android:src="@drawable/event_activity"
             android:scaleType="centerCrop"/>
 
@@ -32,55 +34,68 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Title -->
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"/>
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upcoming"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#10B981"
+                    android:background="#1E10B981"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"/>
+            </LinearLayout>
 
             <!-- Date -->
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#757575"
-                android:layout_marginTop="4dp"/>
+                android:textColor="#94A3B8"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"/>
 
             <!-- Location -->
             <TextView
                 android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#757575"
-                android:layout_marginTop="2dp"/>
+                android:textColor="#94A3B8"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"/>
 
-            <!-- Status -->
-            <TextView
-                android:id="@+id/tvStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Status: Upcoming"
-                android:textStyle="bold"
-                android:textColor="#FF5722"
-                android:layout_marginTop="6dp"/>
-
-            <!-- Join Button -->
+            <!-- Join / Action Button -->
             <Button
                 android:id="@+id/btnJoin"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:text="Join Event"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#4F46E5"
+                app:cornerRadius="12dp"
                 android:layout_marginTop="12dp"/>
 
         </LinearLayout>
 
     </LinearLayout>
-    ```
 
 </com.google.android.material.card.MaterialCardView>

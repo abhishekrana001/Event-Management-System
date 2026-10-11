@@ -1,32 +1,36 @@
 package com.example.eventmanagementsystem.activity
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
-import java.util.Calendar
 import androidx.lifecycle.lifecycleScope
 import com.example.eventmanagementsystem.R
 import com.example.eventmanagementsystem.data.Event
 import com.example.eventmanagementsystem.database.EventDatabase
+import com.example.eventmanagementsystem.utils.DateUtils
 import com.google.android.material.appbar.MaterialToolbar
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Locale
 
 class CreateEventActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_create_event)
 
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Add Event"
 
-        setContentView(R.layout.activity_create_event)
+        val eventId = intent.getIntExtra("eventId", -1)
+        supportActionBar?.title = if (eventId == -1) "Add Event" else "Edit Event"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { finish() }
+
         val db = EventDatabase.getDatabase(this)
         val eventDao = db.eventDao()
 
@@ -37,114 +41,104 @@ class CreateEventActivity : AppCompatActivity() {
         val etLocation = findViewById<EditText>(R.id.etLocation)
         val btnSave = findViewById<Button>(R.id.btnSaveEvent)
 
-        val eventId = intent.getIntExtra("eventId", -1)
-
         if (eventId != -1) {
             etTitle.setText(intent.getStringExtra("title"))
             etDescription.setText(intent.getStringExtra("description"))
             etDate.setText(intent.getStringExtra("date"))
             etTime.setText(intent.getStringExtra("time"))
             etLocation.setText(intent.getStringExtra("location"))
+            btnSave.text = "Update Event"
         }
 
         etDate.setOnClickListener {
-
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePicker = DatePickerDialog(this,
+            val datePicker = DatePickerDialog(
+                this,
                 { _, selectedYear, selectedMonth, selectedDay ->
-                    etDate.setText("$selectedDay/${selectedMonth + 1}/$selectedYear")
+                    val formattedDate = String.format(
+                        Locale.getDefault(),
+                        "%02d/%02d/%04d",
+                        selectedDay,
+                        selectedMonth + 1,
+                        selectedYear
+                    )
+                    etDate.setText(formattedDate)
                 },
-                year, month, day
+                year,
+                month,
+                day
             )
-
             datePicker.show()
         }
 
         etTime.setOnClickListener {
-
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
             val minute = calendar.get(Calendar.MINUTE)
 
-            val timePicker = TimePickerDialog(this,
+            val timePicker = TimePickerDialog(
+                this,
                 { _, selectedHour, selectedMinute ->
+                    val amPm = if (selectedHour >= 12) "PM" else "AM"
+                    var hour12 = if (selectedHour > 12) selectedHour - 12 else selectedHour
+                    if (hour12 == 0) hour12 = 12
 
-                    val amPm: String
-                    var hour12 = selectedHour
-
-                    if (selectedHour >= 12) {
-                        amPm = "PM"
-                        if (selectedHour > 12) hour12 = selectedHour - 12
-                    } else {
-                        amPm = "AM"
-                        if (selectedHour == 0) hour12 = 12
-                    }
-
-                    val formattedMinute = String.format("%02d", selectedMinute)
-
-                    etTime.setText("$hour12:$formattedMinute $amPm")
-
+                    val formattedTime = String.format(
+                        Locale.getDefault(),
+                        "%02d:%02d %s",
+                        hour12,
+                        selectedMinute,
+                        amPm
+                    )
+                    etTime.setText(formattedTime)
                 },
-                hour, minute, false   // ✅ false = 12 hour format
+                hour,
+                minute,
+                false
             )
-
             timePicker.show()
         }
 
-
         btnSave.setOnClickListener {
+            val title = etTitle.text.toString().trim()
+            val description = etDescription.text.toString().trim()
+            val date = etDate.text.toString().trim()
+            val time = etTime.text.toString().trim()
+            val location = etLocation.text.toString().trim()
 
-            val title = etTitle.text.toString()
-            val description = etDescription.text.toString()
-            val date = etDate.text.toString()
-            val time = etTime.text.toString()
-            val location = etLocation.text.toString()
+            if (title.isEmpty() || description.isEmpty() || date.isEmpty() || time.isEmpty() || location.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            // ❌ Agar event date aaj ki hai to save nahi hoga
-            if (isToday(date)) {
-                Toast.makeText(this, "Today's event cannot be added", Toast.LENGTH_SHORT).show()
+            if (DateUtils.isPastDate(date)) {
+                Toast.makeText(this, "Cannot create event in the past date", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             lifecycleScope.launch {
+                val event = Event(
+                    id = if (eventId != -1) eventId else 0,
+                    title = title,
+                    description = description,
+                    date = date,
+                    time = time,
+                    location = location
+                )
 
                 if (eventId == -1) {
-                    eventDao.insert(
-                        Event(
-                            title = title,
-                            description = description,
-                            date = date,
-                            time = time,
-                            location = location
-                        )
-                    )
+                    eventDao.insert(event)
+                    Toast.makeText(this@CreateEventActivity, "Event Created Successfully", Toast.LENGTH_SHORT).show()
                 } else {
-                    eventDao.update(
-                        Event(
-                            id = eventId,
-                            title = title,
-                            description = description,
-                            date = date,
-                            time = time,
-                            location = location
-                        )
-                    )
+                    eventDao.update(event)
+                    Toast.makeText(this@CreateEventActivity, "Event Updated Successfully", Toast.LENGTH_SHORT).show()
                 }
-
-                Toast.makeText(this@CreateEventActivity, "Saved", Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
-    }
-    fun isToday(eventDate: String): Boolean {
-        val formatter = DateTimeFormatter.ofPattern("d/M/yyyy")
-        val today = LocalDate.now()
-        val eDate = LocalDate.parse(eventDate, formatter)
-
-        return eDate.isEqual(today)
     }
 }

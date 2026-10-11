@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Event Management System</string>
     <string name="total_participants">Total Participants: %1$d</string>
+    <string name="bg_description">Background Image</string>
 </resources>

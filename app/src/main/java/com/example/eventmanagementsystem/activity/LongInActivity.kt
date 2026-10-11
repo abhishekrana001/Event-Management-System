@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class LongInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_long_in) // ✅ FIXED
+        setContentView(R.layout.activity_long_in)
 
         val db = EventDatabase.getDatabase(this)
         val userDao = db.userDao()
@@ -38,17 +38,24 @@ class LongInActivity : AppCompatActivity() {
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
 
-
         btnLogin.setOnClickListener {
-
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
+
+            if (email.isEmpty()) {
+                etEmail.error = "Email is required"
+                return@setOnClickListener
+            }
+            if (password.isEmpty()) {
+                etPassword.error = "Password is required"
+                return@setOnClickListener
+            }
 
             lifecycleScope.launch {
                 val user = userDao.login(email, password)
 
                 if (user != null) {
-                    if(user.role == "admin"){
+                    if (user.role == "admin") {
                         val intent = Intent(this@LongInActivity, AdminActivity::class.java)
                         startActivity(intent)
                         finish()
@@ -60,10 +67,8 @@ class LongInActivity : AppCompatActivity() {
                         finish()
                         Toast.makeText(this@LongInActivity, "User Login Success", Toast.LENGTH_SHORT).show()
                     }
-
                 } else {
-                    Toast.makeText(this@LongInActivity, "Invalid Credentials", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this@LongInActivity, "Invalid email or password", Toast.LENGTH_SHORT).show()
                 }
             }
         }

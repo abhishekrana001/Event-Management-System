@@ -2,9 +2,9 @@ package com.example.eventmanagementsystem.activity
 
 import android.os.Bundle
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.eventmanagementsystem.R
 import com.example.eventmanagementsystem.adapter.AdminEventAdapter
 import com.example.eventmanagementsystem.database.EventDatabase
@@ -15,7 +15,6 @@ class AdminStatsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_stats)
-
 
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbarStats)
         setSupportActionBar(toolbar)
@@ -32,23 +31,19 @@ class AdminStatsActivity : AppCompatActivity() {
 
         val database = EventDatabase.getDatabase(this)
 
-        // 🔹 Total Events
         database.eventDao().getTotalEvents().observe(this) { totalEvents ->
-            tvTotalEvents.text = "Total Events: $totalEvents"
+            tvTotalEvents.text = (totalEvents ?: 0).toString()
         }
 
-        // 🔹 Total Participants
         database.eventJoinDao().getTotalParticipants().observe(this) { total ->
-            tvTotalParticipants.text =
-                getString(R.string.total_participants, total)
+            tvTotalParticipants.text = (total ?: 0).toString()
         }
 
-        // 🔹 RecyclerView Setup
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewAdmin)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         database.eventDao().getEventWithParticipantCount().observe(this) { list ->
-            recyclerView.adapter = AdminEventAdapter(list)
+            recyclerView.adapter = AdminEventAdapter(list ?: emptyList())
         }
     }
 }
