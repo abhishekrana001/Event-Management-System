@@ -19,13 +19,11 @@
         android:orientation="vertical"
         android:background="#1E293B">
 
-        <!-- Banner Image -->
-        <ImageView
-            android:id="@+id/imgEvent"
+        <!-- Top Accent Strip -->
+        <View
             android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:src="@drawable/event_activity"
-            android:scaleType="centerCrop"/>
+            android:layout_height="4dp"
+            android:background="#6366F1"/>
 
         <!-- Content Area -->
         <LinearLayout
